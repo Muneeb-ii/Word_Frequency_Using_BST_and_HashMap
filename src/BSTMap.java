@@ -85,4 +85,68 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         toString(this.root, 0, sb);
         return sb.toString();
     }
+
+    /**
+     * Return the size of the BSTMap.
+     * @return the size of the BSTMap
+     */
+    public int size(){
+        return size;
+    }
+
+    /**
+     * Clears the BSTMap.
+     * This method sets the root to null and size to 0.
+     * It effectively removes all the elements from the BSTMap.
+     */
+    public void clear(){
+        root = null;
+        size = 0;
+    }
+
+    /**
+     * Associates the specified value with the specified key in this map.
+     * If the map previously contained a mapping for the key, the old
+     * value is replaced. Does nothing if value is null.
+     *
+     * @param key   key with which the specified value is to be associated
+     * @param value value to be associated with the specified key
+     * @return the previous value associated with key, or
+     *         null if there was no mapping for key.
+     */
+    public V put(K key, V value){
+        put(key, value, root);
+    }
+
+    /**
+     * Helper method to put a key-value pair in the BSTMap.
+     * @param key   the key to be added
+     * @param value the value to be added
+     * @param cur   the current node
+     * @return      the previous value associated with the key, or null if there was no mapping for the key
+     */
+    private V put(K key, V value, Node<K, V> cur) {
+        if (comparator.compare(key, cur.getKey()) < 0){
+            if (cur.left != null){
+                return put(key, value, cur.left);
+            } 
+            else {
+                cur.left = new Node<>(key, value);
+                return null;
+            }
+        } 
+        else if (comparator.compare(key, cur.getKey()) > 0){
+            if (cur.right != null){
+                return put(key, value, cur.right);
+            } 
+            else {
+                cur.right = new Node<>(key, value);
+                return null;
+            }
+        } 
+        else {
+            V oldValue = cur.getValue();
+            cur.setValue(value);
+            return oldValue;
+        }
 }
