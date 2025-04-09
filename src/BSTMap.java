@@ -13,9 +13,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
     private Comparator<K> comparator;
 
     /**
-     * Adds a key-value pair to the map.
-     * If the key already exists, it updates the value.
-     * If the value is null, it adds the key with a the given value.
+     * Creates a node using the given key and value.
      */
     private static class Node<K, V> extends KeyValuePair<K, V>{
         private Node<K, V> left;
@@ -60,5 +58,31 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      */
     public BSTMap(){
         this(null);
+    }
+
+    /**
+     * Helper method to print the BSTMap in a readable format.
+     * @param cur the current node
+     * @param curDepth the current depth of the node
+     * @param sb the StringBuilder to append the string to
+     */
+    private void toString(Node<K, V> cur, int curDepth, StringBuilder sb) {
+        if (cur == null)
+            return;
+    
+        toString(cur.right, curDepth + 1, sb);
+        sb.append("\t".repeat(curDepth) + cur + "\n");
+        toString(cur.left, curDepth + 1, sb);
+    }
+
+    /**
+     * Prints the BSTMap in a readable format.
+     * @return the string representation of the BSTMap
+     */
+    public String toString() {
+        if (size() == 0) return "(empty BST)";
+        StringBuilder sb = new StringBuilder();
+        toString(this.root, 0, sb);
+        return sb.toString();
     }
 }
