@@ -117,7 +117,14 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      *         null if there was no mapping for key.
      */
     public V put(K key, V value){
-        put(key, value, root);
+        if (root == null) {
+            root = new Node<>(key, value);
+            size++;
+            return null;
+        }
+        else{
+            return put(key, value, root);
+        }
     }
 
     /**
@@ -134,6 +141,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
             } 
             else {
                 cur.left = new Node<>(key, value);
+                size++;
                 return null;
             }
         } 
@@ -143,6 +151,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
             } 
             else {
                 cur.right = new Node<>(key, value);
+                size++;
                 return null;
             }
         } 
