@@ -174,8 +174,38 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      *         {@code null} if this map contains no mapping for the key
      */
     public V get(K key){
-        return null;
+        return get(key, root);
     }
+
+    /**
+     * Helper method to get a value from the BSTMap using the given key.
+     * @param key   the key to be searched
+     * @param cur   the current node
+     * @return      the value associated with the key, or null if the key is not found
+     */
+    private V get(K key, Node<K, V> cur) {
+        if (comparator.compare(key, cur.getKey()) < 0){
+            if (cur.left != null){
+                return get(key, cur.left);
+            } 
+            else {
+                return null;
+            }
+        } 
+        else if (comparator.compare(key, cur.getKey()) > 0){
+            if (cur.right != null){
+                return get(key, cur.right);
+            } 
+            else {
+                return null;
+            }
+        } 
+        else {
+            return cur.getValue();
+        }
+    }
+
+    
 
     /**
      * Removes the mapping for a key from this map if it is present. More formally,
