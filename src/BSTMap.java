@@ -5,5 +5,15 @@
  */
 
 public class BSTMap<K, V> implements MapSet<K, V>{
+    
+    private static class Node<K, V> extends KeyValuePair<K, V>{
+        Node<K, V> left;
+        Node<K, V> right;
 
+        public Node(K k, V v) {
+            super(k, v);
+            left = null;
+            right = null;
+        }
+    }
 }
