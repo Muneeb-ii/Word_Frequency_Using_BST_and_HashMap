@@ -171,8 +171,27 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      *         key to a value.
      */
     public boolean containsKey(K key){
-        return true;
+        return containsKey(key, root);
     }
+
+    /**
+     * Helper method to check if the BSTMap contains a key.
+     * @param key the key to be checked
+     * @param curr the current node
+     * @return true if the key is found, false otherwise
+     */
+    private boolean containsKey(K key, Node<K,V> curr){
+        if (curr == null) return false;
+        if (comparator.compare(key, curr.getKey()) < 0){
+            return containsKey(key, curr.left);
+        } 
+        else if (comparator.compare(key, curr.getKey()) > 0){
+            return containsKey(key, curr.right);
+        } 
+        else {
+            return true;
+        }
+    } 
 
     /**
      * Returns the value to which the specified key is mapped,
