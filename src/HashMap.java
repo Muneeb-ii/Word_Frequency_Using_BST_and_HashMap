@@ -232,7 +232,16 @@ public class HashMap<K,V> implements MapSet<K,V> {
      *         order as the keys as returned by keySet().
      */
     public ArrayList<KeyValuePair<K, V>> entrySet(){
-        return null;
+        ArrayList<KeyValuePair<K, V>> entrySet = new ArrayList<>();
+
+        for (int i = 0; i < capacity(); i++) {
+            Node<K,V> current = nodes[i];
+            while (current != null) {
+                entrySet.add(current);
+                current = current.next;
+            }
+        }
+        return entrySet;
     }
 
     /**
