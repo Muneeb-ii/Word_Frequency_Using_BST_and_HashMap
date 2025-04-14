@@ -1,3 +1,5 @@
+
+
 /**
  * Author: Muneeb Azfar Nafees
  * 
@@ -45,6 +47,54 @@ public class BSTMapTester {
         //This test should put a bunch of key/value pairs into the BSTMap, and remove them 
         //one by one--not in order, checking that the size of the BSTMap and its remaining 
         //Values stay correct.
+        System.out.println("-".repeat(30) + "\nTest3: ");
+
+        int[] keys = {4, 2, 6, 1, 3, 5, 7};
+        MapSet<Integer, String> map = new BSTMap<>();
+        for(int i : keys){
+            map.put(i, "" + i);
+        }
+
+        System.out.println("size: " + map.size() + " == " + 7);
+        System.out.println("values" + map.values() + " == " + "[1, 2, 3, 4, 5, 6, 7]");
+        System.out.println( "-".repeat(10) );
+
+        map.remove(7);
+        System.out.println("size: " + map.size() + " == " + 6);
+        System.out.println("values" + map.values() + " == " + "[1, 2, 3, 4, 5, 6]");
+        System.out.println( "-".repeat(10) );
+
+        map.remove(2);
+        System.out.println("size: " + map.size() + " == " + 5);
+        System.out.println("values" + map.values() + " == " + "[1, 3, 4, 5, 6]");
+        System.out.println( "-".repeat(10) );
+
+        map.remove(3);
+        System.out.println("size: " + map.size() + " == " + 4);
+        System.out.println("values" + map.values() + " == " + "[1, 4, 5, 6]");
+        System.out.println( "-".repeat(10) );
+
+        map.remove(4);
+        System.out.println("size: " + map.size() + " == " + 3);
+        System.out.println("values" + map.values() + " == " + "[1, 5, 6]");
+        System.out.println( "-".repeat(10) );
+
+        map.remove(1);
+        System.out.println("size: " + map.size() + " == " + 2);
+        System.out.println("values" + map.values() + " == " + "[5, 6]");
+        System.out.println( "-".repeat(10) );
+
+        map.remove(5);
+        System.out.println("size: " + map.size() + " == " + 1);
+        System.out.println("values" + map.values() + " == " + "[6]");
+        System.out.println( "-".repeat(10) );
+
+        map.remove(6);
+        System.out.println("size: " + map.size() + " == " + 0);
+        System.out.println("values" + map.values() + " == " + "[]");
+        System.out.println( "-".repeat(30) );
+
+
     }
 
     public static void test4(){
