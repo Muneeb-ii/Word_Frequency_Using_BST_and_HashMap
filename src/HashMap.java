@@ -113,5 +113,44 @@ public class HashMap<K,V> implements MapSet<K,V> {
          }
         return output ;
     }
+    
+    /**
+     * Puts the given key-value pair into the HashMap.
+     * If the key already exists, it updates the value.
+     * If the key does not exist, it adds a new node to the front of the linked list.
+     * 
+     * @param key   the key to be added
+     * @param value the value to be added
+     * @return the old value associated with the key, or null if there was no mapping for the key
+     */
+    public V put(K key, V value){
+        int index = hash(key);
+
+        Node<K,V> newNode = new Node<>(key, value);
+
+        if (nodes[index] == null) {
+            nodes[index] = newNode;
+            size++;
+            return null;
+        }
+        else {
+            // Traverse the linked list in the nodes array to find the key
+            Node<K,V> current = nodes[index];
+            while (current != null) {
+                if (current.getKey().equals(key)) {
+                    V oldValue = current.getValue();
+                    current.setValue(value);
+                    return oldValue;
+                }
+                current = current.next;
+            }
+
+             // If the key is not found, add the new node to the front of the linked list
+            newNode.next = nodes[index];
+            nodes[index] = newNode;
+            size++;
+            return null;
+        }       
+    }
 
 }
