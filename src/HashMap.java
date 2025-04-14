@@ -25,24 +25,6 @@ public class HashMap<K,V> implements MapSet<K,V> {
             super(k, v);
             next = null;
         }
-
-        /**
-         * Returns the next node in the linked list.
-         * 
-         * @return the next node in the linked list
-         */
-        public Node<K,V> getNext(){
-            return next;
-        }
-
-        /**
-         * Sets the next node in the linked list.
-         * 
-         * @param next the next node in the linked list
-         */
-        public void setNext(Node<K,V> next){
-            this.next = next;
-        }
     }
 
     /**
