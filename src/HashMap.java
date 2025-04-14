@@ -95,4 +95,23 @@ public class HashMap<K,V> implements MapSet<K,V> {
         size = 0;
     }
 
+    /**
+     * Returns the string representation of the HashMap.
+     * 
+     * @return the string representation of the HashMap
+     */
+    public String toString() {
+         String output = "" ;
+         for ( int i = 0 ; i < this.capacity() ; i ++ ) {
+            Node<K,V> node = this.nodes[ i ] ;
+            output += "bin " + i + ": " ;
+            while (node != null) {
+                output += node.toString() + " | " ;
+                node = node.next ;
+            }
+            output += "\n" ;
+         }
+        return output ;
+    }
+
 }
