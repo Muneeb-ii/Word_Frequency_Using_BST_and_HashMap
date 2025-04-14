@@ -128,15 +128,6 @@ public class HashMap<K,V> implements MapSet<K,V> {
     public V put(K key, V value){
         int index = hash(key);
 
-        // Check if the map needs to be resized
-        if (index >= capacity()){
-            Node<K,V>[] newNodes = (Node<K,V>[]) new Node[capacity() * 2];
-            for (int i = 0; i < capacity(); i++) {
-                newNodes[i] = nodes[i];
-            }
-            nodes = newNodes;
-        }
-
         Node<K,V> newNode = new Node<>(key, value);
 
         if (nodes[index] == null) {
