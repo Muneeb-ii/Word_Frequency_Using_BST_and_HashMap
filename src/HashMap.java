@@ -119,7 +119,7 @@ public class HashMap<K,V> implements MapSet<K,V> {
     /**
      * Puts the given key-value pair into the HashMap.
      * If the key already exists, it updates the value.
-     * If the key does not exist, it adds a new node to the front of the linked list.
+     * If the key does not exist, it adds a new node to the end of the linked list.
      * 
      * @param key   the key to be added
      * @param value the value to be added
@@ -137,6 +137,7 @@ public class HashMap<K,V> implements MapSet<K,V> {
         }
         else {
             // Traverse the linked list in the nodes array to find the key
+            Node<K,V> previous = null;
             Node<K,V> current = nodes[index];
             while (current != null) {
                 if (current.getKey().equals(key)) {
@@ -144,13 +145,12 @@ public class HashMap<K,V> implements MapSet<K,V> {
                     current.setValue(value);
                     return oldValue;
                 }
+                previous = current;
                 current = current.next;
             }
 
-             // If the key is not found, add the new node to the front of the linked list
-            newNode.next = nodes[index];
-            nodes[index] = newNode;
-            size++;
+             // If the key is not found, add the new node to the end of the linked list
+            previous.next = newNode;
             return null;
         }       
     }
