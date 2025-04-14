@@ -165,13 +165,9 @@ public class HashMap<K,V> implements MapSet<K,V> {
     public V get(K key){
         int index  = hash(key);
 
-        if(index>capacity()){
-            return null;
-        }
-
         Node<K,V> curNode = nodes[index];
 
-        while(curNode.next != null){
+        while(curNode != null){
             if(curNode.getKey().equals(key)){
                 V value = curNode.getValue();
                 return value;
