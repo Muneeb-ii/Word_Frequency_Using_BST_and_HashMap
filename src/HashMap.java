@@ -61,10 +61,21 @@ public class HashMap<K,V> implements MapSet<K,V> {
 
     /**
      * Returns the length of the nodes array.
+     * 
      * @return the length of the nodes array
      */
     public int capacity(){
         return nodes.length;
+    }
+
+    /**
+     * Returns the index of the node in the nodes array for the given key.
+     * 
+     * @param key the key to be hashed
+     * @return the index of the node in the nodes array
+     */
+    public int hash(K key){
+        return Math.abs(key.hashCode() % capacity());
     }
 
 }
