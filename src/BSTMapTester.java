@@ -1,5 +1,3 @@
-
-
 /**
  * Author: Muneeb Azfar Nafees
  * 
@@ -100,13 +98,32 @@ public class BSTMapTester {
     public static void test4(){
         //This test should put a bunch of key/value pairs into the BSTMap, 
         //and check that the correct value gets returned when each key is removed.
+        System.out.println("-".repeat(30) + "\nTest4: ");
+
+        int[] keys = {4, 2, 6, 1, 3, 5, 7};
+        MapSet<Integer, String> map = new BSTMap<>();
+        for(int i : keys){
+            map.put(i, "" + i);
+        }
+
+        System.out.println("removed " + map.remove(5) + " == " + 5);
+        System.out.println("removed " + map.remove(2) + " == " + 2);
+        System.out.println("removed " + map.remove(1) + " == " + 1);
+        System.out.println("removed " + map.remove(3) + " == " + 3);
+        System.out.println("removed " + map.remove(4) + " == " + 4);
+        System.out.println("removed " + map.remove(6) + " == " + 6);
+        System.out.println("removed " + map.remove(7) + " == " + 7);
+
+        System.out.println("size: " + map.size() + " == " + 0);
+        System.out.println("values" + map.values() + " == " + "[]");
+        System.out.println( "-".repeat(30) );
     }
 
     public static void main(String[] args){
         test1();
         test2();
         test3();
-        //test4();
+        test4();
     }
 
 }
