@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Author: Muneeb Azfar Nafees
  * 
@@ -187,5 +189,72 @@ public class HashMap<K,V> implements MapSet<K,V> {
         }
 
         return null;
+    }
+
+    /**
+     * Returns {@code true} if this map contains a mapping for the
+     * specified key to a value.
+     *
+     * @param key The key whose presence in this map is to be tested
+     * @return {@code true} if this map contains a mapping for the specified
+     *         key to a value.
+     */
+    public boolean containsKey(K key){
+        return true;
+    }
+
+    /**
+     * Removes the mapping for a key from this map if it is present. More formally,
+     * if this map contains a mapping from key {@code k} to value {@code v} such
+     * that {@code key.equals(k)}, that mapping is removed. (The map can contain at
+     * most one such mapping.)
+     * 
+     * @param key key whose mapping is to be removed from the map
+     * @return the previous value associated with {@code key}, or
+     *         {@code null} if there was no mapping for {@code key}.
+     */
+    public V remove(K key){
+        return null;
+    }
+
+    /**
+     * Returns an ArrayList of all the keys in the map.
+     * 
+     * @return an ArrayList of all the keys in the map.
+     */
+    public ArrayList<K> keySet(){
+        return null;
+    }
+
+    /**
+     * Returns an ArrayList of all the values in the map in the same order as the
+     * keys as returned by keySet().
+     * 
+     * @return an ArrayList of all the values in the map in the same order as the
+     *         keys as returned by keySet().
+     */
+    public ArrayList<V> values(){
+        return null;
+    }
+
+    /**
+     * Returns an ArrayList of each {@code KeyValuePair} in the map in the same
+     * order as the keys as returned by keySet().
+     * 
+     * @return an ArrayList of each {@code KeyValuePair} in the map in the same
+     *         order as the keys as returned by keySet().
+     */
+    public ArrayList<KeyValuePair<K, V>> entrySet(){
+        return null;
+    }
+
+    /**
+     * Returns the maximal number of iterations to find any particular element of
+     * the Map.
+     * 
+     * @return
+     */
+    public int maxDepth(){
+        return 0;
     }
 }
