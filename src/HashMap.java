@@ -59,4 +59,12 @@ public class HashMap<K,V> implements MapSet<K,V> {
         this.maxLoadFactor = loadFactor;
     }
 
+    /**
+     * Returns the length of the nodes array.
+     * @return the length of the nodes array
+     */
+    public int capacity(){
+        return nodes.length;
+    }
+
 }
