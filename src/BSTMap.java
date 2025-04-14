@@ -287,7 +287,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      */
     public ArrayList<V> values(){
         ArrayList<V> values = new ArrayList<>();
-        ArraList<K> keys = keySet();
+        ArrayList<K> keys = keySet();
         for (K key : keys){
             values.add(get(key));
         }
@@ -303,7 +303,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      */
     public ArrayList<KeyValuePair<K, V>> entrySet(){
         ArrayList<KeyValuePair<K,V>> keyValuePairs = new ArrayList<>();
-        ArraList<K> keys = keySet();
+        ArrayList<K> keys = keySet();
         for (K key : keys){
             keyValuePairs.add(new KeyValuePair<>(key, get(key)));
         }
@@ -314,9 +314,22 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      * Returns the maximal number of iterations to find any particular element of
      * the Map.
      * 
-     * @return
+     * @return the maximum depth of the BSTMap
      */
     public int maxDepth(){
-        return 0;
+        return maxDepth(root);
+    }
+
+    /**
+     * Helper method to get the maximum depth of the BSTMap.
+     * 
+     * @param curr the current node
+     * @return the maximum depth of the BSTMap
+     */
+    private int maxDepth(Node<K,V> curr){
+        if (curr == null) return 0;
+        int leftDepth = maxDepth(curr.left);
+        int rightDepth = maxDepth(curr.right);
+        return Math.max(leftDepth, rightDepth) + 1;
     }
 }
