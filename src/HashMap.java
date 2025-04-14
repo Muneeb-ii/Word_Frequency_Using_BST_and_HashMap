@@ -161,4 +161,31 @@ public class HashMap<K,V> implements MapSet<K,V> {
             return null;
         }       
     }
+
+    /**
+     * Returns the value associated with the given key.
+     * If the key does not exist, it returns null.
+     * 
+     * @param key the key to be searched
+     * @return the value associated with the key, or null if the key does not exist
+     */
+    public V get(K key){
+        int index  = hash(key);
+
+        if(index>capacity()){
+            return null;
+        }
+
+        Node<K,V> curNode = nodes[index];
+
+        while(curNode.next != null){
+            if(curNode.getKey().equals(key)){
+                V value = curNode.getValue();
+                return value;
+            }
+            curNode = curNode.next;
+        }
+
+        return null;
+    }
 }
