@@ -34,7 +34,7 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * Initializes the size to 0 and the nodes array to a default size of 16.
      */
     public HashMap(){
-        this(16);
+        this(16,0.75);
     }
 
     /**
@@ -44,8 +44,7 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * @param capacity the initial capacity of the HashMap
      */
     public HashMap(int capacity){
-        size = 0;
-        nodes = (Node<K,V>[]) new Node[capacity];
+        this(capacity, 0.75);
     }
 
     /**
@@ -57,7 +56,8 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * @param loadFactor the maximum load factor of the HashMap
      */
     public HashMap(int capacity, double loadFactor){
-        this(capacity);
+        nodes = (Node<K,V>[]) new Node[capacity];
+        this.size = 0;
         this.maxLoadFactor = loadFactor;
     }
 
