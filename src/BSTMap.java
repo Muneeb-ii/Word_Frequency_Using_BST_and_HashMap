@@ -286,7 +286,11 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      *         keys as returned by keySet().
      */
     public ArrayList<V> values(){
-        return null;
+        ArrayList<V> values = new ArrayList<>();
+        ArraList<K> keys = keySet();
+        for (K key : keys){
+            values.add(get(key));
+        }
     }
 
     /**
