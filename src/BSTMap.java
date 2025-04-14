@@ -291,6 +291,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         for (K key : keys){
             values.add(get(key));
         }
+        return values;
     }
 
     /**
@@ -301,7 +302,12 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      *         order as the keys as returned by keySet().
      */
     public ArrayList<KeyValuePair<K, V>> entrySet(){
-        return null;
+        ArrayList<KeyValuePair<K,V>> keyValuePairs = new ArrayList<>();
+        ArraList<K> keys = keySet();
+        for (K key : keys){
+            keyValuePairs.add(new KeyValuePair<>(key, get(key)));
+        }
+        return keyValuePairs;
     }
 
     /**
