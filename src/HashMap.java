@@ -43,7 +43,7 @@ public class HashMap<K,V> implements MapSet<K,V> {
      */
     public HashMap(int capacity){
         size = 0;
-        nodes = new Node[capacity];
+        nodes = (Node<K,V>[]) new Node[capacity];
     }
 
     /**
@@ -76,6 +76,23 @@ public class HashMap<K,V> implements MapSet<K,V> {
      */
     public int hash(K key){
         return Math.abs(key.hashCode() % capacity());
+    }
+
+    /**
+     * Return the number of elements in the nodes array (size).
+     * 
+     * @return the number of elements in the nodes array (size)
+     */
+    public int size(){
+        return size;
+    }
+
+    /**
+     * Resets the fields of the HashMap to their default values.
+     */
+    public void clear(){
+        nodes  = (Node<K,V>[]) new Node[capacity()];
+        size = 0;
     }
 
 }
