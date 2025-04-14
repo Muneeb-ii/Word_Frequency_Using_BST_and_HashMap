@@ -275,37 +275,47 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
     /**
      * Helper method to handle the replacement of a node in the BSTMap.
-     *  
+     * Uses a recursive call to remove the in‐order successor when the node has two children.
+     * 
      * @param toDelete       the node to be deleted
      * @param toDeleteParent the parent of the node to be deleted
      */
-    private void handleReplacement(Node<K,V> toDelete, Node<K,V> toDeleteParent){
-        Node<K,V> replacement = toDelete;
-
+    private void handleReplacement(Node<K,V> toDelete, Node<K,V> toDeleteParent) {
+        Node<K,V> replacement;
         if (toDelete.left == null && toDelete.right == null) {
+            // Case: no children.
             replacement = null;
-        } 
-        else if (toDelete.left == null) {
+        } else if (toDelete.left == null) {
+            // Case: only right child.
             replacement = toDelete.right;
-        } 
-        else if (toDelete.right == null) {
+        } else if (toDelete.right == null) {
+            // Case: only left child.
             replacement = toDelete.left;
-        } 
-        else {
-            // Find the next largest node
-            Node<K,V> nextLargest = toDelete.right;
-            while (nextLargest.left != null) {
-                nextLargest = nextLargest.left;
+        } else {
+            // Find the in-order successor (smallest node in the right subtree) and track its parent.
+            Node<K,V> successorParent = toDelete;
+            Node<K,V> successor = toDelete.right;
+            while (successor.left != null) {
+                successorParent = successor;
+                successor = successor.left;
             }
-            replacement = nextLargest;
+            // Recursively remove the successor from its original location.
+            handleReplacement(successor, successorParent);
+            // Use the successor as the replacement.
+            replacement = successor;
+            // Attach the left child of the node being deleted to the successor.
+            replacement.left = toDelete.left;
+            // Attach the right child only if the successor isn't the direct right child.
+            if (toDelete.right != successor) {
+                replacement.right = toDelete.right;
+            }
         }
+        // Update parent's pointer.
         if (toDeleteParent == null) {
             root = replacement;
-        } 
-        else if (toDeleteParent.left == toDelete) {
+        } else if (toDeleteParent.left == toDelete) {
             toDeleteParent.left = replacement;
-        } 
-        else {
+        } else {
             toDeleteParent.right = replacement;
         }
     }
