@@ -250,7 +250,64 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      *         {@code null} if there was no mapping for {@code key}.
      */
     public V remove(K key){
-        return null;
+        if (root == null) return null;
+        Node<K, V> toDelete = root;
+        Node<K, V> parent = null;
+
+        while (toDelete != null && comparator.compare(key, toDelete.getKey()) != 0){
+            parent = toDelete;
+            if (comparator.compare(key, toDelete.getKey()) < 0){
+                toDelete = toDelete.left;
+            } 
+            else {
+                toDelete = toDelete.right;
+            }
+        }
+
+        if (toDelete == null) return null; // key not found
+
+
+        V oldValue = toDelete.getValue();
+        handleReplacement(toDelete, parent);
+        size--;
+        return oldValue;
+    }
+
+    /**
+     * Helper method to handle the replacement of a node in the BSTMap.
+     *  
+     * @param toDelete       the node to be deleted
+     * @param toDeleteParent the parent of the node to be deleted
+     */
+    private void handleReplacement(Node<K,V> toDelete, Node<K,V> toDeleteParent){
+        Node<K,V> replacement = toDelete;
+
+        if (toDelete.left == null && toDelete.right == null) {
+            replacement = null;
+        } 
+        else if (toDelete.left == null) {
+            replacement = toDelete.right;
+        } 
+        else if (toDelete.right == null) {
+            replacement = toDelete.left;
+        } 
+        else {
+            // Find the next largest node
+            Node<K,V> nextLargest = toDelete.right;
+            while (nextLargest.left != null) {
+                nextLargest = nextLargest.left;
+            }
+            replacement = nextLargest;
+        }
+        if (toDeleteParent == null) {
+            root = replacement;
+        } 
+        else if (toDeleteParent.left == toDelete) {
+            toDeleteParent.left = replacement;
+        } 
+        else {
+            toDeleteParent.right = replacement;
+        }
     }
 
     /**
