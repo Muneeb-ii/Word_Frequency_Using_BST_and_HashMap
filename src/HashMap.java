@@ -126,6 +126,18 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * @return the old value associated with the key, or null if there was no mapping for the key
      */
     public V put(K key, V value){
+        if(size + 1 > capacity() * maxLoadFactor){
+            // Resize the nodes array if the load factor is exceeded
+            ArrayList<KeyValuePair<K,V>> entrySet = entrySet();
+            Node<K,V>[] newNodes = (Node<K,V>[]) new Node[capacity() * 2];
+            nodes = newNodes;
+            size = 0;
+
+            for (KeyValuePair<K,V> entry : entrySet) {
+                put(entry.getKey(), entry.getValue());
+            }
+        }
+        
         int index = hash(key);
 
         Node<K,V> newNode = new Node<>(key, value);
