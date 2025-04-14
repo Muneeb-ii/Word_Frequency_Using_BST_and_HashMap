@@ -34,6 +34,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
     /**
      * Constructor for the BSTMap class.
+     * 
      * @param comparator the comparator to be used for sorting the keys
      */
     public BSTMap(Comparator<K> comparator){
@@ -63,6 +64,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
     /**
      * Helper method to print the BSTMap in a readable format.
+     * 
      * @param cur the current node
      * @param curDepth the current depth of the node
      * @param sb the StringBuilder to append the string to
@@ -78,6 +80,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
     /**
      * Prints the BSTMap in a readable format.
+     * 
      * @return the string representation of the BSTMap
      */
     public String toString() {
@@ -129,6 +132,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
     /**
      * Helper method to put a key-value pair in the BSTMap.
+     * 
      * @param key   the key to be added
      * @param value the value to be added
      * @param cur   the current node
@@ -176,7 +180,8 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
     /**
      * Helper method to check if the BSTMap contains a key.
-     * @param key the key to be checked
+     * 
+     * @param key  the key to be checked
      * @param curr the current node
      * @return true if the key is found, false otherwise
      */
@@ -207,6 +212,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
     /**
      * Helper method to get a value from the BSTMap using the given key.
+     * 
      * @param key   the key to be searched
      * @param cur   the current node
      * @return      the value associated with the key, or null if the key is not found
@@ -233,8 +239,6 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         }
     }
 
-    
-
     /**
      * Removes the mapping for a key from this map if it is present. More formally,
      * if this map contains a mapping from key {@code k} to value {@code v} such
@@ -255,7 +259,23 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      * @return an ArrayList of all the keys in the map.
      */
     public ArrayList<K> keySet(){
-        return null;
+        ArrayList<K> keys  = new ArrayList<>();
+        return keySet(root, keys);
+    }
+
+    /**
+     * Helper method to get all the keys in sorted order from the BSTMap.
+     * 
+     * @param keys the ArrayList to store the keys
+     * @param cur  the current node
+     * @return the ArrayList of keys
+     */
+    private ArrayList<K> keySet(Node<K, V> cur, ArrayList<K> keys){
+        if (cur == null) return keys;
+        keySet(cur.left, keys);
+        keys.add(cur.getKey());
+        keySet(cur.right, keys);
+        return keys;
     }
 
     /**
