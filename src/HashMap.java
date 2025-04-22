@@ -199,7 +199,13 @@ public class HashMap<K,V> implements MapSet<K,V> {
      *         key to a value.
      */
     public boolean containsKey(K key){
-        return true;
+        ArrayList<K> keys = keySet();
+        for (K k : keys) {
+            if (k.equals(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -281,6 +287,20 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * @return
      */
     public int maxDepth(){
-        return 0;
+        int depth = 0;
+
+        for(int i=0; i<capacity(); i++){
+            int curDepth = 0;
+            Node<K,V> current = nodes[i];
+            while (current !=  null){
+                curDepth++;
+                current=current.next;
+            }
+            if (curDepth>depth){
+                depth = curDepth;
+            }
+        }
+
+        return depth; 
     }
 }
