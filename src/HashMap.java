@@ -242,7 +242,16 @@ public class HashMap<K,V> implements MapSet<K,V> {
      *         keys as returned by keySet().
      */
     public ArrayList<V> values(){
-        return null;
+        ArrayList<V> valueSet = new ArrayList<>();
+
+        for (int i = 0; i < capacity(); i++) {
+            Node<K,V> current = nodes[i];
+            while (current != null) {
+                valueSet.add(current.getValue());
+                current = current.next;
+            }
+        }
+        return valueSet;
     }
 
     /**
