@@ -1,6 +1,3 @@
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Random;
 
 public class HashMapTester {
     
@@ -51,9 +48,20 @@ public class HashMapTester {
      * Testing that size, capacity entry set are correct after put and resize
      */
     public static void test3(){
-        //TODO
         //Put some keys and values into the hashmap
         //Print out the map, size, capacity and entryset and validate that they are all correct
+        System.out.println("-".repeat(30) + "\nTest3: ");
+        HashMap<Integer, String> map = new HashMap<>(4, 0.75);
+        map.put( 5, "" + 1 );
+        map.put( 100, "" + 2 );
+        map.put( 30, "" + 3 );
+        map.put( 12, "" + 4 );
+        map.put( 4, "" + 5 );
+        map.put( 6, "" + 6 );
+        System.out.println("For test 3: the following values should be equal: " );
+        System.out.println( "Size: " + map.size() + ", should be 6" );
+        System.out.println( "Capacity: " + map.capacity() + ", should be 8" );
+        System.out.println( "Entry set: " + map.entrySet() + ", should be <5 -> 1>, <100 -> 2>, <30 -> 3>, <12 -> 4>, <4 -> 5>, <6 -> 6>" );
     }
 
     /** 
@@ -80,7 +88,7 @@ public class HashMapTester {
     public static void main(String[] args){
         test1();
         test2();
-        //test3();
+        test3();
         //test4();
         //test5();
     }
