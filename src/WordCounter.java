@@ -8,9 +8,6 @@ How to run:     java WordCounter
 
 import java.util.ArrayList;
 import java.io.* ;
-import java.io.FileReader ;
-import java.io.FileWriter ;
-import java.io.BufferedReader ;
 
 
 public class WordCounter {
@@ -137,23 +134,84 @@ public class WordCounter {
 		  System.out.println("WordCounter.readWords():: error reading file " + filename);
 		}
 		return false ;
+
 	}
+
+    /**
+     * Returns the top 10 words in the wordCounts map.
+     * @return a string representation of the top 10 words and their counts.
+     */
+    public String getTop10Words(){
+        StringBuilder sb = new StringBuilder();
+
+        // Sort the entry set by value in descending order
+        ArrayList<MapSet.KeyValuePair<String, Integer>> entrySet = this.wordCounts.entrySet();
+        entrySet.sort((a,b) -> b.getValue().compareTo(a.getValue()));
+        
+        for (int i = 0; i < 10; i++) {
+            MapSet.KeyValuePair<String, Integer> keyValuePair = entrySet.get(i);
+            sb.append(keyValuePair.getKey()).append(": ").append(keyValuePair.getValue()).append("\n");
+        }
+
+        return sb.toString();
+    }
 
 	public static void main( String[] args ) {
 		//Choose file for a specific year -- this is a sample for 2008
-		String filename = "CLEANED_reddit_comments_2015.txt" ;
+		String filenameR = "CLEANED_reddit_comments_2015.txt" ;
+        String filenameS = "CLEANED_shakespeare.txt" ;
+
+        System.out.println("-".repeat(50)+"\nRequired Analysis 1\n");
 
 		//Use the BST
-		WordCounter wc = new WordCounter( "BST" ) ;
+		WordCounter wcR = new WordCounter( "BST" ) ;
+        WordCounter wcS = new WordCounter( "BST" ) ;
 
 		//Get the words out of the file
-		ArrayList <String> words = wc.readWords( filename ) ;
+		ArrayList <String> wordsR = wcR.readWords( filenameR ) ;
+        ArrayList <String> wordsS = wcS.readWords( filenameS ) ;
 		
 		//Build the Map from the words
-		wc.buildMap( words );
+		wcR.buildMap(wordsR);
+        wcS.buildMap(wordsS);
 
+        // Print the total word count
+        System.out.println(wcR.getTop10Words());
+        System.out.println(wcS.getTop10Words());
+
+        System.out.println("-".repeat(50)+"\nRequired Analysis 2\n");
+
+        WordCounter wcRHash = new WordCounter( "HashMap" ) ;
+        WordCounter wcSHash = new WordCounter( "HashMap" ) ;
+
+        wcR.clearMap();
+        wcS.clearMap();
+
+        double timeR = 0.0;
+        double timeRHash = 0.0;
+        double timeS = 0.0;
+        double timeSHash = 0.0;
+
+        for(int i=0; i<10; i++){
+            timeR += wcR.buildMap(wordsR);
+            timeS += wcS.buildMap(wordsS);
+            timeRHash += wcRHash.buildMap(wordsR);
+            timeSHash += wcSHash.buildMap(wordsS);
+
+            wcR.clearMap();
+            wcS.clearMap();
+            wcRHash.clearMap();
+            wcSHash.clearMap();
+        }
+
+        System.out.println("Average time for Reddit comments (BST): " + (timeR/10) + " ms");
+        System.out.println("Average time for Reddit comments (HashMap): " + (timeRHash/10) + " ms");
+        System.out.println("Average time for Shakespeare (BST): " + (timeS/10) + " ms");
+        System.out.println("Average time for Shakespeare (HashMap): " + (timeSHash/10) + " ms");
+
+        System.out.println("-".repeat(50)+"\nRequired Analysis 3\n");
 		//Write word counts to an output file
-		wc.writeWordCount( "output.txt" ) ;
+		//wc.writeWordCount( "output.txt" ) ;
 
 	}
 
