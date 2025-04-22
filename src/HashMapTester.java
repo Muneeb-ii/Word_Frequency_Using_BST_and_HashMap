@@ -51,6 +51,8 @@ public class HashMapTester {
         //Put some keys and values into the hashmap
         //Print out the map, size, capacity and entryset and validate that they are all correct
         System.out.println("-".repeat(30) + "\nTest3: ");
+        String expected = "bin 0: \nbin 1: \nbin 2: \nbin 3: \nbin 4: <100 -> 2> | <12 -> 4> | <4 -> 5> | \nbin 5: <5 -> 1> | \nbin 6: <30 -> 3> | <6 -> 6> | \nbin 7: \n";
+        String actual = ""; 
         HashMap<Integer, String> map = new HashMap<>(4, 0.75);
         map.put( 5, "" + 1 );
         map.put( 100, "" + 2 );
@@ -58,10 +60,15 @@ public class HashMapTester {
         map.put( 12, "" + 4 );
         map.put( 4, "" + 5 );
         map.put( 6, "" + 6 );
+        System.out.println("Expected Final Hashmap:\n" + expected );
+        System.out.println("-".repeat(15) + "\n");
+        actual += map;
+        System.out.println("Actual Final Hashmap:\n" + actual );
         System.out.println("For test 3: the following values should be equal: " );
+        System.out.println("Expected and actual output are equal == " + actual.equals(expected));
         System.out.println( "Size: " + map.size() + ", should be 6" );
         System.out.println( "Capacity: " + map.capacity() + ", should be 8" );
-        System.out.println( "Entry set: " + map.entrySet() + ", should be <5 -> 1>, <100 -> 2>, <30 -> 3>, <12 -> 4>, <4 -> 5>, <6 -> 6>" );
+        System.out.println( "Entry set: " + map.entrySet() + ", should be  [<100 -> 2>, <12 -> 4>,  <4 -> 5>, <5 -> 1>, <30 -> 3>, <6 -> 6>]" );
     }
 
     /** 
