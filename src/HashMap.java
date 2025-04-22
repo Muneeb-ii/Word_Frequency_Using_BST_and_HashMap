@@ -219,11 +219,13 @@ public class HashMap<K,V> implements MapSet<K,V> {
      *         key to a value.
      */
     public boolean containsKey(K key){
-        ArrayList<K> keys = keySet();
-        for (K k : keys) {
-            if (k.equals(key)) {
+        int index = hash(key);
+        Node<K,V> current = nodes[index];
+        while (current != null) {
+            if (current.getKey().equals(key)) {
                 return true;
             }
+            current = current.next;
         }
         return false;
     }
