@@ -1,3 +1,8 @@
+/**
+ * Author: Muneeb Azfar Nafees
+ * 
+ * Purpose: This class is used to test the HashMap class.
+ */
 
 public class HashMapTester {
     
