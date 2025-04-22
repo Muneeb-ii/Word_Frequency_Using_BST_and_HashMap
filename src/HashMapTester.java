@@ -75,29 +75,55 @@ public class HashMapTester {
      * Testing remove
      */
     public static void test4(){
-        //TODO
-        //Put around 20 values values into the hashmap
+        //Put around 20 values into the hashmap
         //Remove a few of them at a time and print the size after
         //Make sure it resizes when it's supposed to
+        System.out.println("-".repeat(30) + "\nTest4: ");
+        HashMap<Integer, String> map = new HashMap<>(4, 0.75);
+        for (int i = 0; i < 20; i++){
+            map.put( i, "" + i );
+        }
+        System.out.println("For test 4: the following values should be equal: " );
+        System.out.println("Capacity" + " == " + map.capacity() + ", should be 32" );
+        System.out.println( "Size: " + map.size() + ", should be 20" );
+        for (int i = 0; i < 14; i++){
+            map.remove( i );
+            System.out.println( "Size after removing " + i + ": " + map.size() + ", should be " + (20 - i - 1) );
+        }
+        System.out.println("Capacity" + " == " + map.capacity() + ", should be 32" );
+        map.remove(15);
+        System.out.println( "Size after removing " + 15 + ": " + map.size() + ", should be 5" );
+        System.out.println("Capacity" + " == " + map.capacity() + ", should be 16" );
     }
 
     /** 
      * Testing remove at scale
      */
     public static void test5(){
-        //TODO
         //Add a lot of key/value pairs (e.g. 1000).
         //Remove them one at a time
         //make sure the size stays between the bounds its supposed to
         //Make sure the associated values are correct
+        System.out.println("-".repeat(30) + "\nTest5: ");
+        HashMap<Integer, String> map = new HashMap<>(4, 0.75);
+        for (int i = 0; i < 1000; i++){
+            map.put( i, "" + i );
+        }
+        System.out.println("For test 5: the following values should be equal: " );
+        System.out.println("Capacity" + " == " + map.capacity() + ", should be 2048" );
+        System.out.println( "Size: " + map.size() + ", should be 1000" );
+        for (int i = 0; i < 999; i++){
+            map.remove( i );
+            System.out.println( "Size after removing " + i + ": " + map.size() + ", should be greater than or equals to fC/4: " + (map.size() >= (map.capacity()*0.75)/4) + " and less than or equals to fC: " + (map.size() <= map.capacity()*0.75) );
+        }
     }
 
     public static void main(String[] args){
         test1();
         test2();
         test3();
-        //test4();
-        //test5();
+        test4();
+        test5();
     }
 
 }
