@@ -222,7 +222,16 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * @return an ArrayList of all the keys in the map.
      */
     public ArrayList<K> keySet(){
-        return null;
+        ArrayList<K> keySet = new ArrayList<>();
+
+        for (int i = 0; i < capacity(); i++) {
+            Node<K,V> current = nodes[i];
+            while (current != null) {
+                keySet.add(current.getKey());
+                current = current.next;
+            }
+        }
+        return keySet;
     }
 
     /**
