@@ -210,8 +210,15 @@ public class WordCounter {
         System.out.println("Average time for Shakespeare (HashMap): " + (timeSHash/10) + " ms");
 
         System.out.println("-".repeat(50)+"\nRequired Analysis 3\n");
-		//Write word counts to an output file
-		//wc.writeWordCount( "output.txt" ) ;
+        wcR.buildMap(wordsR);
+        wcS.buildMap(wordsS);
+        wcRHash.buildMap(wordsR);
+        wcSHash.buildMap(wordsS);
+
+        System.out.println("Max depth for Reddit comments (BST): " + wcR.wordCounts.maxDepth());
+        System.out.println("Max depth for Reddit comments (HashMap): " + wcRHash.wordCounts.maxDepth());
+        System.out.println("Max depth for Shakespeare (BST): " + wcS.wordCounts.maxDepth());
+        System.out.println("Max depth for Shakespeare (HashMap): " + wcSHash.wordCounts.maxDepth());
 
 	}
 
