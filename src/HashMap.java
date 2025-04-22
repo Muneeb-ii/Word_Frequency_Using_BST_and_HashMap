@@ -142,8 +142,6 @@ public class HashMap<K,V> implements MapSet<K,V> {
             return oldValue;
         }
         // If the key does not exist, add a new node to the end of the linked list
-        size++;
-        upsize();
 
         int index = hash(key);
 
@@ -151,6 +149,8 @@ public class HashMap<K,V> implements MapSet<K,V> {
 
         if (nodes[index] == null) {
             nodes[index] = newNode;
+            size++;
+            upsize();
             return null;
         }
         else {
@@ -164,6 +164,8 @@ public class HashMap<K,V> implements MapSet<K,V> {
 
              // If the key is not found, add the new node to the end of the linked list
             previous.next = newNode;
+            size++;
+            upsize();
             return null;
         }       
     }
@@ -176,23 +178,6 @@ public class HashMap<K,V> implements MapSet<K,V> {
             // Resize the nodes array if the fC > n
             ArrayList<KeyValuePair<K,V>> entrySet = entrySet();
             Node<K,V>[] newNodes = (Node<K,V>[]) new Node[capacity() * 2];
-            nodes = newNodes;
-            size = 0;
-
-            for (KeyValuePair<K,V> entry : entrySet) {
-                put(entry.getKey(), entry.getValue());
-            }
-        }
-    }
-
-    /**
-     * Upsizes the nodes array if fC>n.
-     */
-    private void downsize(){
-        if(size < (capacity() * maxLoadFactor)/4){
-            // Resize the nodes array if the fC > n
-            ArrayList<KeyValuePair<K,V>> entrySet = entrySet();
-            Node<K,V>[] newNodes = (Node<K,V>[]) new Node[capacity()/2];
             nodes = newNodes;
             size = 0;
 
@@ -352,5 +337,22 @@ public class HashMap<K,V> implements MapSet<K,V> {
             current = current.next;
         }
         return null;
+    }
+
+    /**
+     * Upsizes the nodes array if fC>n.
+     */
+    private void downsize(){
+        if(size < (capacity() * maxLoadFactor)/4){
+            // Resize the nodes array if the fC > n
+            ArrayList<KeyValuePair<K,V>> entrySet = entrySet();
+            Node<K,V>[] newNodes = (Node<K,V>[]) new Node[capacity()/2];
+            nodes = newNodes;
+            size = 0;
+
+            for (KeyValuePair<K,V> entry : entrySet) {
+                put(entry.getKey(), entry.getValue());
+            }
+        }
     }
 }
