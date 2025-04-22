@@ -126,8 +126,54 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * @return the old value associated with the key, or null if there was no mapping for the key
      */
     public V put(K key, V value){
-        if(size + 1 > capacity() * maxLoadFactor){
-            // Resize the nodes array if the load factor is exceeded
+
+        if(containsKey(key)){
+            // If the key already exists, update the value and return the old value
+            V oldValue = get(key);
+            int index = hash(key);
+            Node<K,V> current = nodes[index];
+            while (current != null) {
+                if (current.getKey().equals(key)) {
+                    current.setValue(value);
+                    return oldValue;
+                }
+                current = current.next;
+            }
+            return oldValue;
+        }
+        // If the key does not exist, add a new node to the end of the linked list
+        size++;
+        upsize();
+
+        int index = hash(key);
+
+        Node<K,V> newNode = new Node<>(key, value);
+
+        if (nodes[index] == null) {
+            nodes[index] = newNode;
+            return null;
+        }
+        else {
+            // Traverse the linked list in the nodes array to find the key
+            Node<K,V> previous = null;
+            Node<K,V> current = nodes[index];
+            while (current != null) {
+                previous = current;
+                current = current.next;
+            }
+
+             // If the key is not found, add the new node to the end of the linked list
+            previous.next = newNode;
+            return null;
+        }       
+    }
+
+    /**
+     * Upsizes the nodes array if fC>n.
+     */
+    private void upsize(){
+        if(size > capacity() * maxLoadFactor){
+            // Resize the nodes array if the fC > n
             ArrayList<KeyValuePair<K,V>> entrySet = entrySet();
             Node<K,V>[] newNodes = (Node<K,V>[]) new Node[capacity() * 2];
             nodes = newNodes;
@@ -137,34 +183,6 @@ public class HashMap<K,V> implements MapSet<K,V> {
                 put(entry.getKey(), entry.getValue());
             }
         }
-        
-        int index = hash(key);
-
-        Node<K,V> newNode = new Node<>(key, value);
-
-        if (nodes[index] == null) {
-            nodes[index] = newNode;
-            size++;
-            return null;
-        }
-        else {
-            // Traverse the linked list in the nodes array to find the key
-            Node<K,V> previous = null;
-            Node<K,V> current = nodes[index];
-            while (current != null) {
-                if (current.getKey().equals(key)) {
-                    V oldValue = current.getValue();
-                    current.setValue(value);
-                    return oldValue;
-                }
-                previous = current;
-                current = current.next;
-            }
-
-             // If the key is not found, add the new node to the end of the linked list
-            previous.next = newNode;
-            return null;
-        }       
     }
 
     /**
@@ -206,20 +224,6 @@ public class HashMap<K,V> implements MapSet<K,V> {
             }
         }
         return false;
-    }
-
-    /**
-     * Removes the mapping for a key from this map if it is present. More formally,
-     * if this map contains a mapping from key {@code k} to value {@code v} such
-     * that {@code key.equals(k)}, that mapping is removed. (The map can contain at
-     * most one such mapping.)
-     * 
-     * @param key key whose mapping is to be removed from the map
-     * @return the previous value associated with {@code key}, or
-     *         {@code null} if there was no mapping for {@code key}.
-     */
-    public V remove(K key){
-        return null;
     }
 
     /**
