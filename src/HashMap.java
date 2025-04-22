@@ -186,6 +186,23 @@ public class HashMap<K,V> implements MapSet<K,V> {
     }
 
     /**
+     * Upsizes the nodes array if fC>n.
+     */
+    private void downsize(){
+        if(size < (capacity() * maxLoadFactor)/4){
+            // Resize the nodes array if the fC > n
+            ArrayList<KeyValuePair<K,V>> entrySet = entrySet();
+            Node<K,V>[] newNodes = (Node<K,V>[]) new Node[capacity()/2];
+            nodes = newNodes;
+            size = 0;
+
+            for (KeyValuePair<K,V> entry : entrySet) {
+                put(entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    /**
      * Returns the value associated with the given key.
      * If the key does not exist, it returns null.
      * 
@@ -306,5 +323,34 @@ public class HashMap<K,V> implements MapSet<K,V> {
         }
 
         return depth; 
+    }
+
+    /**
+     * Removes the key-value pair with the given key from the HashMap.
+     * 
+     * @param key the key to be removed
+     * @return the value associated with the removed key, or null if the key does not exist
+     */
+    public V remove(K key){
+        int index = hash(key);
+        Node<K,V> current = nodes[index];
+        Node<K,V> previous = null;
+
+        while (current != null) {
+            if (current.getKey().equals(key)) {
+                if (previous == null) {
+                    nodes[index] = current.next;
+                } else {
+                    previous.next = current.next;
+                }
+                size--;
+                // Check if the size is less than the threshold to downsize: fC/4
+                downsize();
+                return current.getValue();
+            }
+            previous = current;
+            current = current.next;
+        }
+        return null;
     }
 }
