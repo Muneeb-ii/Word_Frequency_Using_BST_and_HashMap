@@ -93,7 +93,7 @@ public class HashMap<K,V> implements MapSet<K,V> {
      * Resets the fields of the HashMap to their default values.
      */
     public void clear(){
-        nodes  = (Node<K,V>[]) new Node[capacity()];
+        nodes  = (Node<K,V>[]) new Node[16];
         size = 0;
     }
 
