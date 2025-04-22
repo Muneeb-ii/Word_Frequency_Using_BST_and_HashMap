@@ -141,7 +141,7 @@ public class WordCounter {
 
 	public static void main( String[] args ) {
 		//Choose file for a specific year -- this is a sample for 2008
-		String filename = "Reddit_Comments_Files-20220403/reddit_comments_2008.txt" ;
+		String filename = "CLEANED_reddit_comments_2015.txt" ;
 
 		//Use the BST
 		WordCounter wc = new WordCounter( "BST" ) ;
