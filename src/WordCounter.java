@@ -1,7 +1,7 @@
 /*
 file name:      WordCounter.java
-Authors:        Ike Lage
-last modified:  10/21/2023
+Authors:        Ike Lage 
+last modified:  23/04/2025 by Muneeb Azfar Nafees
 
 How to run:     java WordCounter
 */
@@ -181,6 +181,7 @@ public class WordCounter {
 
         System.out.println("-".repeat(50)+"\nRequired Analysis 2\n");
 
+		//Use the HashMap
         WordCounter wcRHash = new WordCounter( "HashMap" ) ;
         WordCounter wcSHash = new WordCounter( "HashMap" ) ;
 
@@ -192,6 +193,7 @@ public class WordCounter {
         double timeS = 0.0;
         double timeSHash = 0.0;
 
+		//For each of the 10 trials, build the map and time it
         for(int i=0; i<10; i++){
             timeR += wcR.buildMap(wordsR);
             timeS += wcS.buildMap(wordsS);
@@ -204,6 +206,7 @@ public class WordCounter {
             wcSHash.clearMap();
         }
 
+		//Print the average time taken for to build the map using each data structure
         System.out.println("Average time for Reddit comments (BST): " + (timeR/10) + " ms");
         System.out.println("Average time for Reddit comments (HashMap): " + (timeRHash/10) + " ms");
         System.out.println("Average time for Shakespeare (BST): " + (timeS/10) + " ms");
@@ -215,6 +218,7 @@ public class WordCounter {
         wcRHash.buildMap(wordsR);
         wcSHash.buildMap(wordsS);
 
+		//Print the max depth of each data structure
         System.out.println("Max depth for Reddit comments (BST): " + wcR.wordCounts.maxDepth());
         System.out.println("Max depth for Reddit comments (HashMap): " + wcRHash.wordCounts.maxDepth());
         System.out.println("Max depth for Shakespeare (BST): " + wcS.wordCounts.maxDepth());

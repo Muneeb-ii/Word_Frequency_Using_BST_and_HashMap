@@ -5,7 +5,10 @@
  */
 
 public class BSTMapTester {
-    
+
+    /**
+     * Testing put
+     */
     public static void test1(){
         System.out.println("-".repeat(30) + "\nTest1: ");
 
@@ -21,6 +24,9 @@ public class BSTMapTester {
         System.out.println("-".repeat(30));
     }
 
+    /**
+     * Testing maxDepth, size, and entrySet
+     */
     public static void test2(){
         //Note: This one is implemented for you, but you need to figure out what it should look like!
         System.out.println("-".repeat(30) + "\nTest2: ");
@@ -41,6 +47,9 @@ public class BSTMapTester {
         System.out.println("-".repeat(30));
     }
 
+    /**
+     * Testing remove to make sure size and values are correct
+     */
     public static void test3(){
         //This test should put a bunch of key/value pairs into the BSTMap, and remove them 
         //one by one--not in order, checking that the size of the BSTMap and its remaining 
@@ -95,6 +104,9 @@ public class BSTMapTester {
 
     }
 
+    /**
+     * Testing remove to make sure the correct value is returned
+     */
     public static void test4(){
         //This test should put a bunch of key/value pairs into the BSTMap, 
         //and check that the correct value gets returned when each key is removed.
@@ -119,6 +131,9 @@ public class BSTMapTester {
         System.out.println( "-".repeat(30) );
     }
 
+    /*
+     * Main method to run all tests
+     */
     public static void main(String[] args){
         test1();
         test2();

@@ -141,8 +141,8 @@ public class HashMap<K,V> implements MapSet<K,V> {
             }
             return oldValue;
         }
-        // If the key does not exist, add a new node to the end of the linked list
 
+        // If the key does not exist, add a new node to the end of the linked list
         int index = hash(key);
 
         Node<K,V> newNode = new Node<>(key, value);
@@ -162,7 +162,7 @@ public class HashMap<K,V> implements MapSet<K,V> {
                 current = current.next;
             }
 
-             // If the key is not found, add the new node to the end of the linked list
+            // If the key is not found, add the new node to the end of the linked list
             previous.next = newNode;
             size++;
             upsize();

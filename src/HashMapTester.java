@@ -123,6 +123,9 @@ public class HashMapTester {
         }
     }
 
+    /**
+     * Main method to run all tests
+     */
     public static void main(String[] args){
         test1();
         test2();
