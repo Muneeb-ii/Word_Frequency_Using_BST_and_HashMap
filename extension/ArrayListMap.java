@@ -103,7 +103,7 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * @return an ArrayList of all the keys in the map.
      */
     public ArrayList<K> keySet(){
-        ArrayList<K> keys = new Arraylist<>();
+        ArrayList<K> keys = new ArrayList<>();
         for(int i = 0; i<list.size(); i++){
             keys.add(list.get(i).getKey());
         }
@@ -118,9 +118,9 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      *         keys as returned by keySet().
      */
     public ArrayList<V> values(){
-        ArrayList<V> values = new Arraylist<>();
+        ArrayList<V> values = new ArrayList<>();
         for(int i = 0; i<list.size(); i++){
-            keys.add(list.get(i).getValue());
+            values.add(list.get(i).getValue());
         }
         return values;
     }
