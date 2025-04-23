@@ -49,7 +49,14 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * @return {@code true} if this map contains a mapping for the specified
      *         key to a value.
      */
-    public boolean containsKey(K key);
+    public boolean containsKey(K key){
+        for(int i = 0; i<list.size(); i++){
+            if(list.get(i).getKey().equals(key)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Returns the value to which the specified key is mapped,
