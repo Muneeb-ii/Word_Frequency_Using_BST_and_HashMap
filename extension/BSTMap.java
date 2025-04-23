@@ -436,7 +436,7 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         Random rand = new Random();
 
         System.out.println("-".repeat(50));
-        System.out.println("\nTesting unbalanced keys in BSTMap");
+        System.out.println("Testing unbalanced keys in BSTMap\n");
 
         map.put(1, "1");
         map.put(2, "2");
@@ -445,12 +445,12 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         map.put(5, "5");
         map.put(6, "6");
 
-        System.out.println("Map: " + map);
+        System.out.println("Map: \n" + map);
         System.out.println("Size: " + map.size() + ", Should be 6");
         System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys() + ", Should be 4");
 
         System.out.println("-".repeat(50));
-        System.out.println("\nExploration using Random BSTMap");
+        System.out.println("Exploration using Random BSTMap\n");
         map.clear();
 
         //Insert 10 random keys into the map
@@ -460,29 +460,43 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         }
         
         //Print the number of unbalanced keys and the size of the map
-        System.out.println("Map: " + map);
+        System.out.println("Map: \n" + map);
         System.out.println("Size: " + map.size());
         System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
 
-
+        System.out.println("-".repeat(20));
+        System.out.println("Add 20 more random keys\n");
         //Insert 20 more random keys into the map
         for (int i = 0; i < 20; i++){
             int key = rand.nextInt(10000);
             map.put(key, String.valueOf(key));
         }
-
+        
         //Print the number of unbalanced keys and the size of the map
-        System.out.println("Map: " + map);
+        System.out.println("Map: \n" + map);
         System.out.println("Size: " + map.size());
         System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
 
+        System.out.println("-".repeat(20));
+        System.out.println("Add 30 more random keys\n");
         //Insert 30 more random keys into the map
         for (int i = 0; i < 30; i++){
             int key = rand.nextInt(10000);
             map.put(key, String.valueOf(key));
         }
 
-        System.out.println("Map: " + map);
+        System.out.println("Map: \n" + map);
+        System.out.println("Size: " + map.size());
+        System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
+
+        System.out.println("-".repeat(20));
+        System.out.println("Add 100 more random keys\n");
+        //Insert 30 more random keys into the map
+        for (int i = 0; i < 100; i++){
+            int key = rand.nextInt(10000);
+            map.put(key, String.valueOf(key));
+        }
+        
         System.out.println("Size: " + map.size());
         System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
     }
