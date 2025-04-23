@@ -102,7 +102,13 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * 
      * @return an ArrayList of all the keys in the map.
      */
-    public ArrayList<K> keySet();
+    public ArrayList<K> keySet(){
+        ArrayList<K> keys = new Arraylist<>();
+        for(int i = 0; i<list.size(); i++){
+            keys.add(list.get(i).getKey());
+        }
+        return keys;
+    }
 
     /**
      * Returns an ArrayList of all the values in the map in the same order as the
@@ -111,7 +117,13 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * @return an ArrayList of all the values in the map in the same order as the
      *         keys as returned by keySet().
      */
-    public ArrayList<V> values();
+    public ArrayList<V> values(){
+        ArrayList<V> values = new Arraylist<>();
+        for(int i = 0; i<list.size(); i++){
+            keys.add(list.get(i).getValue());
+        }
+        return values;
+    }
 
     /**
      * Returns an ArrayList of each {@code KeyValuePair} in the map in the same
