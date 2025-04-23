@@ -435,9 +435,27 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         BSTMap<Integer, String> map = new BSTMap<>();
         Random rand = new Random();
 
+        System.out.println("-".repeat(50));
+        System.out.println("\nTesting unbalanced keys in BSTMap");
+
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
+        map.put(4, "4");
+        map.put(5, "5");
+        map.put(6, "6");
+
+        System.out.println("Map: " + map);
+        System.out.println("Size: " + map.size() + ", Should be 6");
+        System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys() + ", Should be 4");
+
+        System.out.println("-".repeat(50));
+        System.out.println("\nExploration using Random BSTMap");
+        map.clear();
+
         //Insert 10 random keys into the map
         for (int i = 0; i < 10; i++){
-            int key = rand.nextInt(100);
+            int key = rand.nextInt(10000);
             map.put(key, String.valueOf(key));
         }
         
@@ -447,9 +465,9 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
 
 
-        //Insert 10 more random keys into the map
-        for (int i = 0; i < 10; i++){
-            int key = rand.nextInt(100);
+        //Insert 20 more random keys into the map
+        for (int i = 0; i < 20; i++){
+            int key = rand.nextInt(10000);
             map.put(key, String.valueOf(key));
         }
 
@@ -457,6 +475,15 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         System.out.println("Map: " + map);
         System.out.println("Size: " + map.size());
         System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
-        
+
+        //Insert 30 more random keys into the map
+        for (int i = 0; i < 30; i++){
+            int key = rand.nextInt(10000);
+            map.put(key, String.valueOf(key));
+        }
+
+        System.out.println("Map: " + map);
+        System.out.println("Size: " + map.size());
+        System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
     }
 }
