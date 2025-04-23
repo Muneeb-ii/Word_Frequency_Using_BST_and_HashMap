@@ -66,7 +66,14 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * @return the value to which the specified key is mapped, or
      *         {@code null} if this map contains no mapping for the key
      */
-    public V get(K key);
+    public V get(K key){
+        for(int i = 0; i<list.size(); i++){
+            if(list.get(i).getKey().equals(key)){
+                return list.get(i).getValue();
+            }
+        }
+        return null;
+    }
 
     /**
      * Removes the mapping for a key from this map if it is present. More formally,
