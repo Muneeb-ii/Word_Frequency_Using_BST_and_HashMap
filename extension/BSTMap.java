@@ -399,4 +399,40 @@ public class BSTMap<K, V> implements MapSet<K, V>{
         int rightDepth = maxDepth(curr.right);
         return Math.max(leftDepth, rightDepth) + 1;
     }
+
+    /**
+     * Returns the number of unbalanced keys in the BSTMap.
+     * A key is considered unbalanced if the difference between the heights of its
+     * left and right subtrees is greater than 1.
+     * 
+     * @return the number of unbalanced keys in the BSTMap
+     */
+    public int numberOfUnbalancedKeys(){ 
+        return unbalancedKeys(root);
+    }
+
+    /**
+     * Helper method to count the number of unbalanced keys in the BSTMap.
+     * 
+     * @param node the current node
+     * @return the number of unbalanced keys in the BSTMap
+     */
+    private int unbalancedKeys(Node<K,V> node){
+        int total = 0;
+
+        if(node==null){
+            return 0;
+        }
+
+        int leftHeight = unbalancedKeys(node.left);
+        int rightHeight = unbalancedKeys(node.right);
+
+        int balanceFactor = Math.abs(leftHeight-rightHeight);
+
+        if(balanceFactor>1 || balanceFactor<-1){
+            total++;
+        }
+
+        return total;
+    }
 }
