@@ -15,13 +15,19 @@ public class WordCounter {
 	private MapSet<String, Integer> wordCounts ;
 	private int wordCount ;
 
-	//constructor, where data_structure is either "bst" or "hashmap"
+	//constructor, where data_structure is either "bst" or "hashmap" or "hashmapext"
 	public WordCounter( String data_structure ) {
 		if ( data_structure.equals( "BST" ) ) {
 			wordCounts = new BSTMap<String, Integer>() ;
-		} else {
-			assert data_structure.equals( "HashMap" ) : "Invalid data structure" ;
+		} 
+		else if( data_structure.equals( "HashMap" ) ) {
 			wordCounts = new HashMap<String, Integer>() ;
+		}
+		else if(data_structure.equals( "HashMapExt" ) ) {
+			wordCounts = new HashMapExt<String, Integer>() ;
+		}
+		else {
+			assert false : "Invalid data structure" ;
 		}
 	}
 
