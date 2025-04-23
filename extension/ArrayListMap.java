@@ -132,20 +132,27 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * @return an ArrayList of each {@code KeyValuePair} in the map in the same
      *         order as the keys as returned by keySet().
      */
-    public ArrayList<KeyValuePair<K, V>> entrySet();
+    public ArrayList<KeyValuePair<K, V>> entrySet(){
+        return list;
+    }
 
     /**
      * Returns the number of key-value mappings in this map.
      *
      * @return the number of key-value mappings in this map
      */
-    public int size();
+    public int size(){
+        return size;
+    }
 
     /**
      * Removes all of the mappings from this map.
      * The map will be empty after this call returns.
      */
-    public void clear();
+    public void clear(){
+        list.clear();
+        size = 0;
+    }
 
     /**
      * Returns the maximal number of iterations to find any particular element of
@@ -153,6 +160,7 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * 
      * @return
      */
-    public int maxDepth();
-}
+    public int maxDepth(){
+        return list.size();
+    }
 }
