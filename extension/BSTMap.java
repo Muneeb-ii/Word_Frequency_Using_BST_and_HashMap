@@ -430,4 +430,33 @@ public class BSTMap<K, V> implements MapSet<K, V>{
 
         return count + unbalancedKeys(node.left) + unbalancedKeys(node.right);
     }
+
+    public static void main(String[] args){
+        BSTMap<Integer, String> map = new BSTMap<>();
+        Random rand = new Random();
+
+        //Insert 10 random keys into the map
+        for (int i = 0; i < 10; i++){
+            int key = rand.nextInt(100);
+            map.put(key, String.valueOf(key));
+        }
+        
+        //Print the number of unbalanced keys and the size of the map
+        System.out.println("Map: " + map);
+        System.out.println("Size: " + map.size());
+        System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
+
+
+        //Insert 10 more random keys into the map
+        for (int i = 0; i < 10; i++){
+            int key = rand.nextInt(100);
+            map.put(key, String.valueOf(key));
+        }
+
+        //Print the number of unbalanced keys and the size of the map
+        System.out.println("Map: " + map);
+        System.out.println("Size: " + map.size());
+        System.out.println("Unbalanced Keys: " + map.numberOfUnbalancedKeys());
+        
+    }
 }
