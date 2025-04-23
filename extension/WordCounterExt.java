@@ -168,66 +168,55 @@ public class WordCounterExt {
 		String filenameR = "CLEANED_reddit_comments_2015.txt" ;
         String filenameS = "CLEANED_shakespeare.txt" ;
 
-        System.out.println("-".repeat(50)+"\nRequired Analysis 1\n");
-
 		//Use the BST
 		WordCounterExt wcR = new WordCounterExt( "BST" ) ;
         WordCounterExt wcS = new WordCounterExt( "BST" ) ;
 
-		//Get the words out of the file
-		ArrayList <String> wordsR = wcR.readWords( filenameR ) ;
-        ArrayList <String> wordsS = wcS.readWords( filenameS ) ;
-		
-		//Build the Map from the words
-		wcR.buildMap(wordsR);
-        wcS.buildMap(wordsS);
-
-        // Print the total word count
-        System.out.println(wcR.getTop10Words());
-        System.out.println(wcS.getTop10Words());
-
-        System.out.println("-".repeat(50)+"\nRequired Analysis 2\n");
-
+        //Use the HashMap
         WordCounterExt wcRHash = new WordCounterExt( "HashMap" ) ;
         WordCounterExt wcSHash = new WordCounterExt( "HashMap" ) ;
 
-        wcR.clearMap();
-        wcS.clearMap();
+        //Use the ArrayList
+        WordCounterExt wcRArray = new WordCounterExt( "ArrayList" ) ;
+        WordCounterExt wcSArray = new WordCounterExt( "ArrayList" ) ;
+
+		//Get the words out of the file
+		ArrayList <String> wordsR = wcR.readWords( filenameR ) ;
+        ArrayList <String> wordsS = wcS.readWords( filenameS ) ;
+
+        System.out.println("-".repeat(50)+"\nAverage time to build map\n");
 
         double timeR = 0.0;
         double timeRHash = 0.0;
         double timeS = 0.0;
         double timeSHash = 0.0;
+        double timeRArray = 0.0;
+        double timeSArray = 0.0;
 
+        //Build the map 10 times and average the time
         for(int i=0; i<10; i++){
             timeR += wcR.buildMap(wordsR);
             timeS += wcS.buildMap(wordsS);
             timeRHash += wcRHash.buildMap(wordsR);
             timeSHash += wcSHash.buildMap(wordsS);
+            timeRArray += wcRArray.buildMap(wordsR);
+            timeSArray += wcSArray.buildMap(wordsS);
 
             wcR.clearMap();
             wcS.clearMap();
             wcRHash.clearMap();
             wcSHash.clearMap();
+            wcRArray.clearMap();
+            wcSArray.clearMap();
         }
 
+        // Print the average time taken for each data structure
         System.out.println("Average time for Reddit comments (BST): " + (timeR/10) + " ms");
         System.out.println("Average time for Reddit comments (HashMap): " + (timeRHash/10) + " ms");
         System.out.println("Average time for Shakespeare (BST): " + (timeS/10) + " ms");
         System.out.println("Average time for Shakespeare (HashMap): " + (timeSHash/10) + " ms");
-
-        System.out.println("-".repeat(50)+"\nRequired Analysis 3\n");
-        wcR.buildMap(wordsR);
-        wcS.buildMap(wordsS);
-        wcRHash.buildMap(wordsR);
-        wcSHash.buildMap(wordsS);
-
-        System.out.println("Max depth for Reddit comments (BST): " + wcR.wordCounts.maxDepth());
-        System.out.println("Max depth for Reddit comments (HashMap): " + wcRHash.wordCounts.maxDepth());
-        System.out.println("Max depth for Shakespeare (BST): " + wcS.wordCounts.maxDepth());
-        System.out.println("Max depth for Shakespeare (HashMap): " + wcSHash.wordCounts.maxDepth());
+        System.out.println("Average time for Reddit comments (ArrayList): " + (timeRArray/10) + " ms");
+        System.out.println("Average time for Shakespeare (ArrayList): " + (timeSArray/10) + " ms");
 
 	}
-
-
 }
