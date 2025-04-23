@@ -19,10 +19,17 @@ public class WordCounterExt {
 	public WordCounterExt( String data_structure ) {
 		if ( data_structure.equals( "BST" ) ) {
 			wordCounts = new BSTMap<String, Integer>() ;
-		} else {
-			assert data_structure.equals( "HashMap" ) : "Invalid data structure" ;
+		} 
+        else if(data_structure.equals( "HashMap" ) ) {
 			wordCounts = new HashMap<String, Integer>() ;
 		}
+        else if(data_structure.equals( "ArrayList" ) ) {
+            wordCounts = new ArrayListMap<String, Integer>() ;
+        }
+        else{
+            assert false : "Invalid data structure" ;
+        }
+
 	}
 
 	//given the filename of a text file, read the text file and return an ArrayList list of all the words in the file.
