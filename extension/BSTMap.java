@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  * Author: Muneeb Azfar Nafees
@@ -418,21 +419,15 @@ public class BSTMap<K, V> implements MapSet<K, V>{
      * @return the number of unbalanced keys in the BSTMap
      */
     private int unbalancedKeys(Node<K,V> node){
-        int total = 0;
+        if(node==null) return 0;
 
-        if(node==null){
-            return 0;
-        }
-
-        int leftHeight = unbalancedKeys(node.left);
-        int rightHeight = unbalancedKeys(node.right);
+        int leftHeight = maxDepth(node.left);
+        int rightHeight = maxDepth(node.right);
 
         int balanceFactor = Math.abs(leftHeight-rightHeight);
 
-        if(balanceFactor>1 || balanceFactor<-1){
-            total++;
-        }
+        int count = balanceFactor>1? 1:0;
 
-        return total;
+        return count + unbalancedKeys(node.left) + unbalancedKeys(node.right);
     }
 }
