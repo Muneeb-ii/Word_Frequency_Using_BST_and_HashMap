@@ -85,7 +85,17 @@ public class ArrayListMap<K, V> implements MapSet<K, V>{
      * @return the previous value associated with {@code key}, or
      *         {@code null} if there was no mapping for {@code key}.
      */
-    public V remove(K key);
+    public V remove(K key){
+        for(int i = 0; i<list.size(); i++){
+            if(list.get(i).getKey().equals(key)){
+                V oldValue = list.get(i).getValue();
+                list.remove(i);
+                size--;
+                return oldValue;
+            }
+        }
+        return null;
+    }
 
     /**
      * Returns an ArrayList of all the keys in the map.
