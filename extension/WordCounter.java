@@ -185,6 +185,7 @@ public class WordCounter {
         double timeSHashExt = 0.0;
         double timeSHash = 0.0;
 
+		//Build the map 10 times and average the time
         for(int i=0; i<10; i++){
             timeRHashExt += wcRHashExt.buildMap(wordsR);
             timeSHashExt += wcSHashExt.buildMap(wordsS);
@@ -197,6 +198,7 @@ public class WordCounter {
             wcSHashExt.clearMap();
         }
 
+		//Print the average time taken to build the map
         System.out.println("Average time for Reddit comments (HashMapEXT): " + (timeRHashExt/10) + " ms");
         System.out.println("Average time for Reddit comments (HashMap): " + (timeRHash/10) + " ms");
         System.out.println("Average time for Shakespeare (HashMapExt): " + (timeSHashExt/10) + " ms");
@@ -208,6 +210,7 @@ public class WordCounter {
         wcRHash.buildMap(wordsR);
         wcSHash.buildMap(wordsS);
 
+		//Print the max depth of each structure
         System.out.println("Max depth for Reddit comments (HashMapExt): " + wcRHashExt.wordCounts.maxDepth());
         System.out.println("Max depth for Reddit comments (HashMap): " + wcRHash.wordCounts.maxDepth());
         System.out.println("Max depth for Shakespeare (HashMapExt): " + wcSHashExt.wordCounts.maxDepth());
